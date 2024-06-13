@@ -639,7 +639,34 @@ export const count = createCount();
 
 
           <h1 id="logic-">Logic:</h1>
-          <h2 id="if-">If:</h2>
+          <h2 id="if-">Implementación:</h2>
+          <p>
+            Svelte facilita la implementación de lógica a través del uso de javascript estándar. 
+            Esta funcionalidad se puede implementar a través del uso de la etiqueta script o con 
+            la implementación de módulos de javascript
+          </p>
+          <pre><code class="js"><div class="highlight"><pre>
+
+          &lt;script&gt;
+          let a = 5;
+          let b = 4;
+          let result = a + b;
+      
+          function calculateSum(x, y) {
+            return x + y;
+          }
+        
+          let sum = calculateSum(12, 20);
+      
+          &lt;/script&gt;
+          &lt;p&gt;  La suma de {a} y {b} es {result}&lt;/p&gt;
+          &lt;p&gt; La suma calculada es {sum} &lt;/p&gt;
+        </pre></div></code></pre>
+
+        <p>
+            Puedes ver este ejemplo en acción <a href="https://svelte.dev/repl/2044a971916b4d11b0eeab925386c9a6?version=4.2.18" target="_blank">aquí</a>.
+        </p>
+                  <h2 id="if-">If:</h2>
           <p>
             Podemos usar un condicional if en el archivo .svelte. Las expresiones tienen la misma
             organización que se usa en javascript, por lo que se pueden usar los mismos operadores
@@ -665,6 +692,9 @@ export const count = createCount();
         <span class="nt">&lt;/button&gt;</span>
     {/if}
 </pre></div></code></pre>
+<p>
+    Puedes un ejemplo del uso de #if en acción <a href="https://svelte.dev/repl/94acd31f133148779fb1a4b61498e794?version=4.2.18" target="_blank">aquí</a>.
+</p>
 
           <h2 id="else-">Else:</h2>
           <p>Podemos añadir una condición else en lugar de dos o más condicionales:</p>
@@ -714,11 +744,29 @@ export const count = createCount();
         <span class="nt">&lt;p&gt;</span>{x} es impar <span class="nt">&lt;/p&gt;</span>
     {/if}
 </pre></div></code></pre>
+<h2 id="each-">Operadores lógicos</h2>
+<p>
+    Svelte permite el uso de operadores lógicos como "&&" o "!" para la creación de condiciones más complejas
+  </p>
+  <pre><code>&lt;script&gt;
+    let user = {
+        name: 'Juan',
+        age: 30
+      };
+  &lt;/script&gt;
+  {#if user && user.age >= 18}
+
+  &lt;p&gt{user.name} es mayor de edad &lt;/p&gt;
+{:else}
+&lt;p&gt{user.name} es menor de edad &lt;/p&gt;
+{/if}
+</code></pre>
 
           <h2 id="each-">Each:</h2>
           <p>
-            Podemos recorrer una lista usando la función Each. Se comporta similar a un ciclo for, y
-            es posible añadir un índice que acompaña cada elemento recorrido de la lista:
+            En Svelte, puedes recorrer una lista utilizando la función each. Esta función se comporta de manera similar a un ciclo for,
+             permitiendo iterar sobre arrays y objetos para renderizar dinámicamente listas de elementos en el DOM. Además, es posible 
+             añadir un índice que acompaña a cada elemento recorrido de la lista.
           </p>
           <pre><code class="lang-html"><div class="highlight"><pre>  <span class="nt">&lt;script&gt;</span>
         <span class="kd">let</span> <span class="nx">cats</span> <span class="o">=</span> <span class="p">[</span>
@@ -746,6 +794,9 @@ export const count = createCount();
         {/each}
     <span class="nt">&lt;/ul&gt;</span>
 </pre></div></code></pre>
+<p>
+    Puedes ver un ejemplo deluso de #each en acción<a href="https://svelte.dev/repl/bb6797ac11fa42fda7ff0d9181983ce8?version=4.2.18" target="_blank">aquí</a>.
+</p>
 
           <h2 id="await-">Await:</h2>
           <p>
@@ -786,6 +837,10 @@ export const count = createCount();
         <span class="nt">&lt;p</span> <span class="na">style=</span><span class="s">&quot;color: red&quot;</span><span class="nt">&gt;</span>{error.message}<span class="nt">&lt;/p&gt;</span>
     {/await}
 </pre></div></code></pre>
+<p>
+    Para ver un ejemplo más complejo de varias de las implementaciones de lógica dentro de Svelte haz
+    click <a href="https://svelte.dev/repl/ea4a72092e744a94879bbe7942d3637b?version=4.2.18" target="_blank">aquí</a>.
+</p>
           <h1 id="events-">Events:</h1>
           <p>Svelte nos facilita hacer uso y definir listeners hacia eventos en el DOM usando</p>
           <pre><code class="lang-html"><div class="highlight"><pre>on:<span class="nt">&lt;event&gt;</span>
@@ -861,8 +916,10 @@ export const count = createCount();
           </ul>
 
           <h2 id="inline-handlers-">Component events:</h2>
-          Los componentes también pueden disparar eventos. `createEventDispatcher` debe ser llamado
-          cuando el componente es iniciado por primera vez. Esto permite conectar el envio a donde
+          En Svelte, los componentes pueden disparar eventos personalizados para comunicar información a otros componentes,
+           generalmente a los componentes padres. Para disparar estos eventos, se utiliza createEventDispatcher. Esta función 
+           debe ser llamada cuando el componente se inicializa por primera vez. Esto permite conectar el envío de eventos desde 
+           el componente a donde el componente fue instanciado.
           el componente fue instanciado Inner.svelte
           <pre> <code>&lt;script&gt;
     import { createEventDispatcher } from &#39;svelte&#39;;
@@ -891,6 +948,9 @@ export const count = createCount();
 &lt;/script&gt;
 &lt;Inner on:message/&gt;</code>
 </pre>
+<p>
+    Puedes ver un ejemplo más complejo de la implementación de eventos en Svelte dando click <a href="https://svelte.dev/repl/f1b6b8dae8b144a59fe41e7f837ae3bc?version=4.2.18" target="_blank">aquí</a>.
+</p>
 
           <h1 id="inline-handlers-">Bindings:</h1>
           Un binding es una propiedad de las etiquetas de Svelte que permite asignarla a un valor
