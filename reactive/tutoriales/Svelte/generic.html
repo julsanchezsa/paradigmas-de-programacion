@@ -1268,7 +1268,7 @@ export const count = createCount();
           ciclo de vida. Las funciones del ciclo de vida se deben llamar mientras el componente se
           está inicializando para que la devolución de llamada esté vinculada a la instancia del
           componente.
-          <h2 id="inline-handlers-">Lifecycle</h2>
+          <h2 id="inline-handlers-">onMount:</h2>
           Corre despues de que el componente es renderizado primero en el DOM. Si la llamada de
           onMount devuelve una función, esa función se llamará cuando se destruya el componente
           <pre>
@@ -1313,7 +1313,9 @@ export const count = createCount();
 <span class="o">&lt;</span><span class="err">/style&gt;</span>
 </code>
 </pre>
-
+        <p>
+            Puedes ver este ejemplo en acción <a href="https://svelte.dev/repl/393f845ff39e454c952a49607c61d843?version=4.2.18" target="_blank">aquí</a>.
+        </p>
           <h2 id="ondestroy-">onDestroy:</h2>
           <p>Es necesario cuando se quiere ejecutar codigo cuando el componente es destruido.</p>
           <p>App.svelte</p>
@@ -1344,6 +1346,9 @@ export function onInterval(callback, milliseconds) {
 }
 </pre></div></code></pre>
           
+        <p>
+            Puedes ver este ejemplo en acción <a href="https://svelte.dev/repl/7f2419ce64494bb6956f257b60257498?version=4.2.18" target="_blank">aquí</a>.
+        </p>
         <h2 id="beforeupdate-and-afterupdate-">beforeUpdate and afterUpdate:</h2>
           <p>
             Son sus contrapartes, la funcion <code>beforeUpdate</code> programa trabajo para
@@ -1462,6 +1467,9 @@ export function onInterval(callback, milliseconds) {
     &lt;input on:keydown={handleKeydown}&gt;
 &lt;/div&gt;
 </pre></div></code></pre>
+        <p>
+            Puedes ver este ejemplo en acción <a href="https://svelte.dev/repl/35b74619db30421d9be08244d5463417?version=4.2.18" target="_blank">aquí</a>.
+        </p>
           <h2 id="tick-">Tick:</h2>
           <p>
             Retorna una promesa que se resuelve tan pronto cualquier cambio de estado pendiente ha
@@ -1508,6 +1516,9 @@ export function onInterval(callback, milliseconds) {
 
 <span class="nt">&lt;textarea</span> <span class="na">value=</span><span class="s">{text}</span> <span class="na">on:keydown=</span><span class="s">{handleKeydown}</span><span class="nt">&gt;&lt;/textarea&gt;</span>
 </pre></div></code></pre>
+        <p>
+            Puedes ver este ejemplo en acción <a href="https://svelte.dev/repl/86f8c0a8534b4d4ab106ea4dc5196b83?version=4.2.18" target="_blank">aquí</a>.
+        </p>
 
 
 <h1 id="motion"><em>Motion</em></h1>
