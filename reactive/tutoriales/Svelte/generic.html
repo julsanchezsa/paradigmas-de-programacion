@@ -570,6 +570,74 @@ function createCount() {
 
 export const count = createCount();
 </pre></div></code></pre>
+<h2 id="stores-binding"><em>Store </em> bindings</h2>
+<p>
+    A continuación, se mostrará un ejemplo de cómo usar stores writable y binding para crear una lista de tareas en Svelte. Este ejemplo permitirá añadir y eliminar tareas de la lista de la siguiente manera:
+</p>
+
+<p>El archivo stores.js define el estado central de la lista de tareas utilizando un store writable de Svelte. En este archivo, el store tareas se inicializa con una lista de tareas predefinidas, cada una con un id, una descripción y un estado que indica si la tarea ha sido completada o no.</p>
+<p>store.js</p>
+
+<pre><code class="js"><div class="highlight"><pre>import { writable } from &#39;svelte/store&#39;;
+
+    export const tareas = writable([
+	{ id: 1, texto: 'Aprender Svelte', completada: false },
+	{ id: 2, texto: 'Construir una app', completada: false }
+
+    ]);
+    </pre></div></code></pre>
+
+<p>
+    El archivo page.svelte implementa la interfaz de usuario para gestionar la lista de tareas utilizando el store tareas. Este componente permite agregar, eliminar y marcar tareas como completadas.
+</p>
+<p>Input Binding: El campo de entrada está ligado a la variable nuevaTarea usando bind:value={nuevaTarea}, lo que permite que el valor de nuevaTarea se actualice en tiempo real con lo que el usuario escribe.</p>
+<p>page.svelte</p>
+
+<pre><code class="js"><div class="highlight"><pre>
+
+    &lt;script&gt;
+    import { tareas } from './stores.js';
+	let nuevaTarea = '';
+
+	function agregarTarea() {
+		if (nuevaTarea.trim() !== '') {
+			tareas.update(tareas => [
+				...tareas,
+				{ id: Date.now(), texto: nuevaTarea, completada: false }
+			]);
+			nuevaTarea = '';
+		}
+	}
+
+	function eliminarTarea(id) {
+		tareas.update(tareas => tareas.filter(tarea => tarea.id !== id));
+	}
+
+	function toggleCompletada(id) {
+		tareas.update(tareas =>
+			tareas.map(tarea =>
+				tarea.id === id ? { ...tarea, completada: !tarea.completada } : tarea
+			)
+		);
+	}
+
+    &lt;/script&gt;
+
+    &lt;h1&gt;Lista de Tareas&lt;/h1&gt;
+    &lt;input bind:value={nuevaTarea} placeholder="Nueva tarea"/&gt;
+    &lt;button on:click={agregarTarea}&gt;Agregar tarea&lt;/button&gt;
+    &lt;ul&gt;
+        {#each $tareas as tarea (tarea.id)}
+        &lt;li&gt;
+        &lt;input type="checkbox" checked={tarea.completada} on:change={() => toggleCompletada(tarea.id)}/&gt;
+        {tarea.texto}
+        &lt;button on:click={() => eliminarTarea(tarea.id)}&gt;Eliminar&lt;/button&gt;
+    &lt;/li&gt;
+    {/each}
+    &lt;/ul&gt;
+    </pre></div></code></pre>
+
+
           <h1 id="logic-">Logic:</h1>
           <h2 id="if-">If:</h2>
           <p>
